@@ -15,7 +15,7 @@ Flag = True
 
 # Создание файла лога
 file = open('Lines.txt', 'w')
-string = 'frame number\t\tnumber of lines\t\tcoefficient 1\t\t\t\tcoefficient 1\n\n'
+string = 'frame number\t\tnumber of lines\t\tcoefficient 1\t\tcoefficient 2\n\n'
 file.write(string)
 
 # Создание папок для изображений
@@ -82,15 +82,15 @@ while(capture.isOpened() and Flag):
             # Запись строк в лог
             x1,y1,x2,y2 = i[0]
             if x2 != x1:
-                string = str(counter) + '\t\t\t' + str(len(lines)) + '\t\t\t' + str((y2-y1)/(x2-x1)) + '\t\t\t\t\t' + str((y1*x2-x1*y2)/(x2-x1)) + '\n'
+                string = str(counter) + '\t\t\t' + str(len(lines)) + '\t\t\t' + str(round(((y2-y1)/(x2-x1)), 3)) + '\t\t\t' + str(round(((y1*x2-x1*y2)/(x2-x1)), 3)) + '\n'
                 file.write(string)
             
-            # Запись каждого 10 изображения с прямыми
-            os.chdir('.\\Files\\Color images with Hough\\')
-            cv2.imwrite('img {}.jpeg'.format(counter), frame)
-            os.chdir('..')
-            os.chdir('..')
-    #cv2.imshow('video', frame)
+#             # Запись каждого 10 изображения с прямыми
+#             os.chdir('.\\Files\\Color images with Hough\\')
+#             cv2.imwrite('img {}.jpeg'.format(counter), frame)
+#             os.chdir('..')
+#             os.chdir('..')
+    cv2.imshow('video', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 cv2.destroyAllWindows()
